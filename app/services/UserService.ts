@@ -25,7 +25,7 @@ export class userService implements UserService {
       if (!!oldUser) {
         return {
           status: 400,
-          message: "User Already Exist. Please Login",
+          message: "User already exist. please try to login",
         };
       }
 

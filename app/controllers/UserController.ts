@@ -17,7 +17,7 @@ export class userController implements UserController {
       }
       return res.status(result?.status).send({
         token: result?.token,
-        message: "User has created successfully.",
+        message: "User has been created successfully.",
       });
     } catch (error) {
       return res.status(500).send({
@@ -36,7 +36,7 @@ export class userController implements UserController {
       }
       return res.status(result?.status).send({
         token: result?.token,
-        message: "User has signed successfully.",
+        message: "User has beend signed successfully.",
       });
       
     } catch (error) {
