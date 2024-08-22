@@ -26,4 +26,22 @@ export class userRepository implements UserRepository {
       throw error;
     }
   }
+
+  async getUserInfo(email: string) {
+    try {
+      const user = await User.findOne({ email }, { password: 0, isDelete: 0 });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      const users = await User.find({}, { password: 0, isDelete: 0 });
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

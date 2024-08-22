@@ -12,10 +12,7 @@ export const verifyToken = async (
     if (!token) return res.status(401).json({ error: "Invalid Token" });
     token = token?.split(" ")?.[1];
     const decoded: any = jwt.verify(token, config.tokenSecret);
-    console.log("reqquest ==>> ", token);
-    console.log("decoded ==>> ", decoded);
     req.userData = decoded?.data;
-    //   req.userId = decoded.userId;
     next();
   } catch (error) {
     res.status(401).json({ error: "Invalid token" });

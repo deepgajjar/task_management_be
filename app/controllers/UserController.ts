@@ -38,7 +38,28 @@ export class userController implements UserController {
         token: result?.token,
         message: "User has beend signed successfully.",
       });
-      
+    } catch (error) {
+      return res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+
+  async getAllUsers(req: Request, res: Response) {
+    try {
+      const users = await this.userService.getAllUserService();
+      return res.status(200).send(users);
+    } catch (error) {
+      return res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+
+  async currentUserInfo(req: Request | any, res: Response) {
+    try {
+      const user = await this.userService.getUserInfo(req?.userData?.email);
+      return res.status(200).send(user);
     } catch (error) {
       return res.status(500).send({
         message: "Something went wrong.",

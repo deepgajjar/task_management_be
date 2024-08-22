@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 import { config } from "./config/config";
 import authRoutes from "./routes/authRoutes";
 import ticketRoutes from "./routes/ticketRoutes";
@@ -12,13 +12,10 @@ dotenv.config();
 
 const MONGO_URI = config.mongodbConnection;
 
-// mongo connection
-// mongoose.connect(MONGO_URI,{
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   }as ConnectOptions)
 mongoose
-  .connect(MONGO_URI)
+  .connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 5000,
+  } as ConnectOptions)
   .then(() => {
     console.log("MongoDb has been connected");
   })

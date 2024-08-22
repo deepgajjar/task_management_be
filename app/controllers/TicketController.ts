@@ -10,8 +10,14 @@ export class ticketController implements TicketController {
   ) {}
 
   async getAllTickets(req: Request | any, res: Response) {
-    console.log("userData ==>>> ", req?.userData);
-    return res.status(200).send([]);
+    try {
+      const tickets = await this.ticketService.fetchAllTicketsService();
+      return res.status(200).send(tickets);
+    } catch (error) {
+      return res.status(500).send({
+        messaage: "Something went wrong",
+      });
+    }
   }
 
   async createTicket(req: Request | any, res: Response) {
@@ -31,7 +37,35 @@ export class ticketController implements TicketController {
         data: result,
       });
     } catch (error) {
-      console.log("error ==>>> ", error);
+      return res.status(500).send({
+        messaage: "Something went wrong",
+      });
+    }
+  }
+
+  async getAssignedTickets(req: Request | any, res: Response) {
+    try {
+      const ticket = await this.ticketService.fetchAssignedTicketsService(
+        req?.userData
+      );
+      return res.status(200).send(ticket);
+    } catch (error) {
+      return res.status(500).send({
+        messaage: "Something went wrong",
+      });
+    }
+  }
+
+  async updateTicket(req: Request | any, res: Response) {
+    try {
+      const result = await this.ticketService.updateTicketService(
+        req?.body,
+        req?.params?.id
+      );
+      return res.status(200).send({
+        message: "ticket has been updated.",
+      });
+    } catch (error) {
       return res.status(500).send({
         messaage: "Something went wrong",
       });

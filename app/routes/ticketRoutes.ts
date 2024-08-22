@@ -13,7 +13,22 @@ router.get(
   verifyToken,
   ticketController.getAllTickets.bind(ticketController)
 );
-router.post("/ticket/create", verifyToken,ticketController.createTicket.bind(ticketController));
-// router.post("/user/signin", userController.signin.bind(userController));
+router.get(
+  "/ticket/get-assgined-tickets",
+  verifyToken,
+  ticketController.getAssignedTickets.bind(ticketController)
+);
+
+router.post(
+  "/ticket/create",
+  verifyToken,
+  ticketController.createTicket.bind(ticketController)
+);
+
+router.put(
+  "/ticket/update/:id",
+  verifyToken,
+  ticketController.updateTicket.bind(ticketController)
+);
 
 export default router;
